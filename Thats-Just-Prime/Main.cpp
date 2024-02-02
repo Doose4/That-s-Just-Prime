@@ -21,17 +21,18 @@ int FindLCD(int nmbr) {
 
 
 int PrimeTime(int nmbr) {
+	int lcd = (FindLCD(nmbr));
 
-	cout << "finding primes of " << nmbr;
+	cout << "\nfinding primes of " << nmbr;
 
 	if (nmbr < 2){
 		return 1;
 	}
-	else if (nmbr == 2) {
-		return 2;
+	else if (lcd == 1) {
+		return nmbr;
 	}
 
-	cout << PrimeTime(nmbr / FindLCD(nmbr)); //<< " X " << PrimeTime(FindLCD(nmbr));
+	cout << "\n" << lcd << " X " << PrimeTime(nmbr / lcd);
 	
 
 }
