@@ -104,9 +104,11 @@ int main() {
 	Driver();
 
 	//Main function
-	int inpt = 28;
+	int inpt = 0;
+	cout << "Enter a number greater than 1: ";
+	cin >> inpt;
 	PrimeTime(inpt);
-	cout<< outpt(inpt);
+	cout << outpt(inpt);
 
 	return 0;
 }
