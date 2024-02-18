@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <ctype.h>
 #include <vector>
 #include <string>
 #include <cassert>
@@ -52,7 +53,17 @@ void PrimeTime(int nmbr) {
 	branches.push_back(lcd);
 	//recursion
 	PrimeTime(nmbr / lcd);
+	return;
 
+}
+
+bool isPrime(string mystr) {
+	int loc;
+	loc = mystr.find("X");
+	if (loc < 1000) {
+		return true;
+	}
+	return false;
 }
 
 
@@ -94,6 +105,20 @@ void Driver() {
 	PrimeTime(inpt);
 	assert(outpt(inpt) == "11 X 101");
 
+	cout << "Uses isPrime Function";
+	PrimeTime(2);
+	assert(isPrime(outpt(inpt)) == true);
+	branches.clear();
+	PrimeTime(6);
+	assert(isPrime(outpt(inpt)) == true);
+	branches.clear();
+	PrimeTime(13);
+	assert(isPrime(outpt(inpt)) == true);
+	branches.clear();
+	PrimeTime(198);
+	assert(isPrime(outpt(inpt)) == true);
+	branches.clear();
+
 	cout << "Congrats, it passed!!\n\n";
 
 	branches.clear();
@@ -101,7 +126,7 @@ void Driver() {
 
 int main() {
 	//driver to test
-	//Driver();
+	Driver();
 
 	//Main function
 	int inpt = 0;
