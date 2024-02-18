@@ -126,7 +126,7 @@ void Driver() {
 
 int main() {
 	//driver to test
-	//Driver();
+	Driver();
 
 	//Main function
 	int inpt = 0;
