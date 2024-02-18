@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <algorithm>
 
 using namespace std;
 
@@ -66,6 +67,62 @@ bool isPrime(string mystr) {
 	return false;
 }
 
+void reduce(int* myarr, int val1, int val2) {
+	int reduction1=1;
+	int reduction2=1;
+	PrimeTime(val1);
+	vector<int> string1{};
+	for (int i = 0; i < branches.size(); i++)
+	{
+		string1.push_back(branches[i]);
+	}	
+	branches.clear();
+	PrimeTime(val2);
+	vector<int> string2{};
+	for (int i = 0; i < branches.size(); i++)
+	{
+		string2.push_back(branches[i]);
+	}
+	branches.clear();
+	std::sort(string1.begin(), string1.end());
+	std::sort(string2.begin(), string2.end());
+	vector<int>::iterator it;
+
+	for (int i = 0; i < string1.size(); i++)
+	{
+		for (int j = 0; j < string2.size(); j++)
+		{
+			if (string1[i] == string2[j]) {
+				it = string1.begin() + i;
+				string1.erase(it);
+				it = string2.begin() + j;
+				string2.erase(it);
+				if (i != 0) {
+					i--;
+				}
+				j--;
+			}
+			else if (string1[i]<string2[j])
+			{
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < string1.size(); i++)
+	{	
+		reduction1 = reduction1 * string1[i];
+	}
+	for (int i = 0; i < string2.size(); i++)
+	{
+		reduction2 = reduction2 * string2[i];
+	}
+
+	*myarr = reduction1;
+	*(myarr +1) = reduction2;
+
+}
+
 
 void Driver() {
 	cout << "Starting the test...\n";
@@ -105,7 +162,7 @@ void Driver() {
 	PrimeTime(inpt);
 	assert(outpt(inpt) == "11 X 101");
 
-	cout << "Uses isPrime Function";
+	cout << "Uses isPrime Function\n";
 	PrimeTime(2);
 	assert(isPrime(outpt(inpt)) == true);
 	branches.clear();
@@ -118,6 +175,16 @@ void Driver() {
 	PrimeTime(198);
 	assert(isPrime(outpt(inpt)) == true);
 	branches.clear();
+
+	cout << "Uses the reduction function\n";
+	int myarr[2] = {0, 0};
+	int* pntr = myarr;
+	reduce(pntr, 50, 100);
+	cout << myarr[0] << "/" << myarr[1] << endl;
+	reduce(pntr, 50, 50);
+	cout << myarr[0] << "/" << myarr[1] << endl;
+	reduce(pntr, 75, 125);
+	cout << myarr[0] << "/" << myarr[1] << endl;
 
 	cout << "Congrats, it passed!!\n\n";
 
